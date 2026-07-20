@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rare Gems Jaipur — Collection</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --ink:       #1C1917;
+    --ink2:      #57534E;
+    --ink3:      #A8A29E;
+    --bg:        #FAFAF8;
+    --surface:   #FFFFFF;
+    --border:    #E7E5E0;
+    --border2:   #D6D3CD;
+    --gold:      #9A7B3C;
+    --gold-light:#F5EFE0;
+    --emerald:   #1E4D3A;
+    --emerald-light: #E8F0EC;
+    --ruby:      #8B2635;
+    --sapphire:  #1B3A6B;
+    --radius:    4px;
+    --radius-lg: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: #FFFFFF;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .logo span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .result-count {
+    font-size: 12px;
+    color: var(--ink3);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── HERO STRIP ── */
+  .hero-strip {
+    background: var(--emerald);
+    padding: 28px 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    color: #FFFFFF;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: #C9A96E;
+  }
+
+  .hero-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 130px;
+  }
+
+  .filter-group.wide { min-width: 180px; }
+
+  .filter-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .filter-select, .filter-input {
+    padding: 8px 12px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    background: var(--bg);
+    font-size: 13px;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .filter-select:focus, .filter-input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .select-wrap {
+    position: relative;
+  }
+
+  .select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink3);
+    font-size: 11px;
+    pointer-events: none;
+  }
+
+  .range-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .range-row input {
+    width: 80px;
+    padding: 8px 10px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    background: var(--bg);
+    font-size: 13px;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .range-row input:focus { outline: none; border-color: var(--gold); }
+  .range-sep { color: var(--ink3); font-size: 12px; }
+
+  .reset-btn {
+    padding: 8px 16px;
+    background: none;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    font-size: 12px;
+    color: var(--ink2);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+    align-self: flex-end;
+    transition: all 0.15s;
+  }
+
+  .reset-btn:hover { border-color: var(--ink2); color: var(--ink); }
+
+  /* ── ACTIVE FILTERS ── */
+  .active-filters {
+    padding: 10px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .active-filters:empty { display: none; }
+
+  .filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    background: var(--gold-light);
+    border: 1px solid #D4B97A;
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--gold);
+  }
+
+  .filter-tag button {
+    background: none;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+  }
+
+  /* ── GRID ── */
+  .catalog-wrap {
+    padding: 24px 32px 60px;
+  }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  /* ── STONE CARD ── */
+  .stone-card {
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+
+  .stone-card:hover { z-index: 2; box-shadow: 0 4px 24px rgba(0,0,0,0.1); }
+
+  .card-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .stone-card:hover .card-image img { transform: scale(1.04); }
+
+  .no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #F0EDE7 0%, #E8E4DC 100%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--border2);
+    font-style: italic;
+  }
+
+  .cert-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(4px);
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink2);
+    text-transform: uppercase;
+  }
+
+  .media-icons {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .media-icon {
+    width: 28px;
+    height: 28px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .media-icon:hover { background: rgba(0,0,0,0.8); }
+
+  .card-body {
+    padding: 14px 16px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-id {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink3);
+    text-transform: uppercase;
+  }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .card-weight {
+    font-size: 13px;
+    color: var(--ink2);
+  }
+
+  .card-weight strong {
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .card-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .pill {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--ink2);
+    white-space: nowrap;
+  }
+
+  .pill.origin { background: var(--emerald-light); border-color: #B8D4C8; color: var(--emerald); }
+  .pill.treatment { background: var(--gold-light); border-color: #D4B97A; color: #7A5F28; }
+
+  .card-price {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--ink3);
+    text-transform: uppercase;
+  }
+
+  .price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+
+  .whatsapp-btn:hover { background: #1EB855; }
+
+  /* ── EMPTY / LOADING ── */
+  .state-screen {
+    padding: 80px 32px;
+    text-align: center;
+    color: var(--ink3);
+  }
+
+  .state-screen .state-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-style: italic;
+    color: var(--border2);
+    margin-bottom: 16px;
+  }
+
+  .state-screen p { font-size: 15px; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .lightbox.show { display: flex; }
+
+  .lightbox-inner {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    max-width: 880px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 640px) {
+    .lightbox-inner { grid-template-columns: 1fr; }
+    .filter-bar { padding: 14px 16px; }
+    .hero-strip { padding: 20px 16px; }
+    .catalog-wrap { padding: 16px 16px 60px; }
+    .site-header { padding: 0 16px; }
+    .active-filters { padding: 10px 16px; }
+  }
+
+  .lb-image {
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .lb-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .lb-no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #F0EDE7 0%, #E8E4DC 100%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    color: var(--border2);
+    font-style: italic;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+
+  .lb-body {
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+  }
+
+  .lb-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lb-id { font-size: 11px; letter-spacing: 0.1em; color: var(--ink3); text-transform: uppercase; }
+
+  .lb-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .lb-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .lb-divider { border: none; border-top: 1px solid var(--border); }
+
+  .lb-spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+  }
+
+  .lb-spec { display: flex; flex-direction: column; gap: 2px; }
+  .lb-spec-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); }
+  .lb-spec-value { font-size: 14px; color: var(--ink); font-weight: 500; }
+
+  .lb-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  .lb-wa-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .lb-wa-btn:hover { background: #1EB855; }
+
+  .lb-media-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .lb-media-btn {
+    flex: 1;
+    padding: 9px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    background: none;
+    font-size: 13px;
+    color: var(--ink2);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .lb-media-btn:hover { border-color: var(--ink2); color: var(--ink); }
+
+  /* config overlay */
+  .config-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .config-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    max-width: 440px;
+    width: 100%;
+  }
+
+  .config-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .config-logo span { color: var(--gold); font-style: italic; }
+
+  .config-sub {
+    font-size: 13px;
+    color: var(--ink3);
+    margin-bottom: 28px;
+  }
+
+  .cfg-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .cfg-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    font-size: 14px;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 16px;
+    background: var(--bg);
+  }
+
+  .cfg-input:focus { outline: none; border-color: var(--gold); }
+
+  .cfg-hint { font-size: 11px; color: var(--ink3); margin-top: -10px; margin-bottom: 16px; line-height: 1.5; }
+
+  .cfg-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--emerald);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.03em;
+  }
+
+  .cfg-btn:hover { background: #163D2E; }
+</style>
+</head>
+<body>
+
+<!-- Config overlay -->
+<div class="config-overlay" id="config-overlay">
+  <div class="config-box">
+    <div class="config-logo">Rare <span>Gems</span> Jaipur</div>
+    <p class="config-sub">Enter your Apps Script Web App URL to load the collection.</p>
+
+    <label class="cfg-label">Apps Script URL</label>
+    <input class="cfg-input" id="cfg-script-url" placeholder="https://script.google.com/macros/s/.../exec">
+    <p class="cfg-hint">The Web App URL from your deployed Apps Script project.</p>
+
+    <button class="cfg-btn" onclick="saveConfig()">Load Collection</button>
+  </div>
+</div>
+
+<!-- Site header -->
+<header class="site-header">
+  <div class="logo">Rare <span>Gems</span> Jaipur</div>
+  <div class="header-right">
+    <span class="result-count" id="result-count"></span>
+    <button onclick="resetConfig()" style="background:none;border:none;color:#57534E;font-size:12px;cursor:pointer;letter-spacing:0.05em">⚙</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero-strip">
+  <div>
+    <div class="hero-title">The <em>Collection</em></div>
+    <div class="hero-sub">Certified Natural Gemstones · Jaipur</div>
+  </div>
+</div>
+
+<!-- Filters -->
+<div class="filter-bar">
+  <div class="filter-group wide">
+    <span class="filter-label">Stone Type</span>
+    <div class="select-wrap">
+      <select class="filter-select" id="f-type" onchange="applyFilters()">
+        <option value="">All Types</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Origin</span>
+    <div class="select-wrap">
+      <select class="filter-select" id="f-origin" onchange="applyFilters()">
+        <option value="">All Origins</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Shape</span>
+    <div class="select-wrap">
+      <select class="filter-select" id="f-shape" onchange="applyFilters()">
+        <option value="">All Shapes</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Treatment</span>
+    <div class="select-wrap">
+      <select class="filter-select" id="f-treatment" onchange="applyFilters()">
+        <option value="">All</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Weight (ct)</span>
+    <div class="range-row">
+      <input type="number" id="f-wt-min" placeholder="Min" step="0.01" oninput="applyFilters()">
+      <span class="range-sep">–</span>
+      <input type="number" id="f-wt-max" placeholder="Max" step="0.01" oninput="applyFilters()">
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Code</span>
+    <div class="range-row">
+      <input type="number" id="f-code-min" placeholder="Min" oninput="applyFilters()">
+      <span class="range-sep">–</span>
+      <input type="number" id="f-code-max" placeholder="Max" oninput="applyFilters()">
+    </div>
+  </div>
+
+  <button class="reset-btn" onclick="resetFilters()">Clear filters</button>
+</div>
+
+<!-- Active filter tags -->
+<div class="active-filters" id="active-filters"></div>
+
+<!-- Catalog -->
+<div class="catalog-wrap">
+  <div class="state-screen" id="loading-screen">
+    <div class="state-icon">✦</div>
+    <p>Loading collection…</p>
+  </div>
+  <div class="state-screen" id="empty-screen" style="display:none">
+    <div class="state-icon">◇</div>
+    <p>No stones match your filters.</p>
+  </div>
+  <div class="catalog-grid" id="catalog-grid" style="display:none"></div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-inner" id="lb-inner"></div>
+</div>
+
+<script>
+const WA_NUMBER = '911414028706';
+let allStones = [];
+let filtered  = [];
+let config    = {};
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('rgj-catalog-config-v2');
+  if (saved) {
+    config = JSON.parse(saved);
+    document.getElementById('config-overlay').style.display = 'none';
+    loadStones();
+  }
+});
+
+function saveConfig() {
+  const url = document.getElementById('cfg-script-url').value.trim();
+  if (!url) { alert('Please enter the Apps Script URL'); return; }
+  config = { scriptUrl: url };
+  localStorage.setItem('rgj-catalog-config-v2', JSON.stringify(config));
+  document.getElementById('config-overlay').style.display = 'none';
+  loadStones();
+}
+
+function resetConfig() {
+  if (confirm('Reset connection?')) {
+    localStorage.removeItem('rgj-catalog-config-v2');
+    location.reload();
+  }
+}
+
+// ── LOAD DATA ──
+async function loadStones() {
+  try {
+    const url = `${config.scriptUrl}?action=getCatalogStones`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (data.error) throw new Error(data.error);
+
+    allStones = data.stones.map(r => ({
+        id:        r.id,
+        type:      r.type,
+        weight:    parseFloat(r.weight) || 0,
+        coding:    r.coding || '',
+        grade:     '',
+        treatment: r.treatment,
+        cert:      r.cert,
+        certNo:    r.certNo,
+        shape:     r.shape,
+        origin:    r.origin,
+        color:     r.color,
+        pieces:    cell(r, 11),
+        dims:      cell(r, 12),
+        status:    cell(r, 13),
+        image:     cell(r, 14),
+        video:     cell(r, 15),
+        folder:    r.folder,
+        certUrl:   r.certUrl,
+        image:     r.image,
+        video:     r.video,
+      }));
+
+    populateFilters();
+    applyFilters();
+
+  } catch (e) {
+    document.getElementById('loading-screen').innerHTML =
+      '<div class="state-icon">✕</div><p>Could not load. Check your Apps Script URL and make sure the deployment is set to Anyone.</p>';
+    console.error(e);
+  }
+}
+
+// ── FILTERS ──
+function populateFilters() {
+  const unique = (key) => [...new Set(allStones.map(s => s[key]).filter(Boolean))].sort();
+  fillSelect('f-type',      unique('type'));
+  fillSelect('f-origin',    unique('origin'));
+  fillSelect('f-shape',     unique('shape'));
+  fillSelect('f-treatment', unique('treatment'));
+}
+
+function fillSelect(id, options) {
+  const sel = document.getElementById(id);
+  const first = sel.options[0];
+  sel.innerHTML = '';
+  sel.appendChild(first);
+  options.forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = opt.textContent = o;
+    sel.appendChild(opt);
+  });
+}
+
+function applyFilters() {
+  const type     = document.getElementById('f-type').value;
+  const origin   = document.getElementById('f-origin').value;
+  const shape    = document.getElementById('f-shape').value;
+  const treatment= document.getElementById('f-treatment').value;
+  const wtMin    = parseFloat(document.getElementById('f-wt-min').value) || 0;
+  const wtMax    = parseFloat(document.getElementById('f-wt-max').value) || Infinity;
+  const codeMin  = parseFloat(document.getElementById('f-code-min').value) || 0;
+  const codeMax  = parseFloat(document.getElementById('f-code-max').value) || Infinity;
+
+  filtered = allStones.filter(s =>
+    (!type      || s.type === type) &&
+    (!origin    || s.origin === origin) &&
+    (!shape     || s.shape === shape) &&
+    (!treatment || s.treatment === treatment) &&
+    (s.weight >= wtMin && s.weight <= wtMax) &&
+    (s.coding >= codeMin && s.coding <= codeMax)
+  );
+
+  renderGrid();
+  renderActiveTags();
+  document.getElementById('result-count').textContent = filtered.length + ' stones';
+}
+
+function resetFilters() {
+  ['f-type','f-origin','f-shape','f-treatment'].forEach(id => document.getElementById(id).value = '');
+  ['f-wt-min','f-wt-max','f-code-min','f-code-max'].forEach(id => document.getElementById(id).value = '');
+  applyFilters();
+}
+
+function renderActiveTags() {
+  const container = document.getElementById('active-filters');
+  const labels = {
+    'f-type': 'Type', 'f-origin': 'Origin', 'f-shape': 'Shape', 'f-treatment': 'Treatment'
+  };
+  container.innerHTML = Object.entries(labels).map(([id, label]) => {
+    const val = document.getElementById(id).value;
+    return val ? `<span class="filter-tag">${label}: ${val} <button onclick="clearFilter('${id}')">×</button></span>` : '';
+  }).join('');
+}
+
+function clearFilter(id) {
+  document.getElementById(id).value = '';
+  applyFilters();
+}
+
+// ── RENDER ──
+function renderGrid() {
+  const grid    = document.getElementById('catalog-grid');
+  const empty   = document.getElementById('empty-screen');
+  const loading = document.getElementById('loading-screen');
+
+  loading.style.display = 'none';
+
+  if (filtered.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  grid.style.display  = 'grid';
+
+  grid.innerHTML = filtered.map((s, i) => `
+    <div class="stone-card" onclick="openLightbox(${i})">
+      <div class="card-image">
+        ${s.image
+          ? `<img src="${s.image}" alt="${s.type}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'>✦</div>'">`
+          : '<div class="no-image">✦</div>'}
+        ${s.cert ? `<span class="cert-badge">${s.cert}</span>` : ''}
+        <div class="media-icons">
+          ${s.video  ? `<a class="media-icon" href="${s.video}" target="_blank" onclick="event.stopPropagation()" title="Video">▶</a>` : ''}
+          ${s.certUrl? `<a class="media-icon" href="${s.certUrl}" target="_blank" onclick="event.stopPropagation()" title="Certificate">📄</a>` : ''}
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-id">${s.id}</div>
+        <div class="card-name">${s.type}</div>
+        <div class="card-weight"><strong>${s.weight} ct</strong>${s.color ? ' · ' + s.color : ''}</div>
+        <div class="card-pills">
+          ${s.origin    ? `<span class="pill origin">${s.origin}</span>` : ''}
+          ${s.shape     ? `<span class="pill">${s.shape}</span>` : ''}
+          ${s.treatment ? `<span class="pill treatment">${s.treatment}</span>` : ''}
+          ${s.grade     ? `<span class="pill">${s.grade}</span>` : ''}
+        </div>
+        <div class="card-price">
+          <div>
+            <div class="price-label">Code</div>
+            <div class="price-value">${s.coding || '—'}</div>
+          </div>
+          <a class="whatsapp-btn" href="${waLink(s)}" target="_blank" onclick="event.stopPropagation()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Enquire
+          </a>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function waLink(s) {
+  const msg = encodeURIComponent(
+    `Hi, I'm interested in this stone from your collection:\n\n` +
+    `*${s.type}* (${s.id})\n` +
+    `Weight: ${s.weight} ct\n` +
+    `Origin: ${s.origin || 'N/A'}\n` +
+    `Shape: ${s.shape || 'N/A'}\n` +
+    `Treatment: ${s.treatment || 'N/A'}\n` +
+    `Certificate: ${s.cert || 'N/A'} ${s.certNo ? '· ' + s.certNo : ''}\n` +
+    `Code: ${s.coding}\n\n` +
+    `Please share availability and pricing.`
+  );
+  return `https://wa.me/${WA_NUMBER}?text=${msg}`;
+}
+
+// ── LIGHTBOX ──
+function openLightbox(i) {
+  const s = filtered[i];
+  const lb = document.getElementById('lb-inner');
+
+  lb.innerHTML = `
+    <div class="${s.image ? 'lb-image' : 'lb-no-image'}">
+      ${s.image
+        ? `<img src="${s.image}" alt="${s.type}" onerror="this.parentElement.className='lb-no-image';this.parentElement.innerHTML='✦'">`
+        : '✦'}
+    </div>
+    <div class="lb-body">
+      <div class="lb-id">${s.id}</div>
+      <div class="lb-name">${s.type}</div>
+      <div class="lb-price">${s.coding || '—'}</div>
+      <hr class="lb-divider">
+      <div class="lb-spec-grid">
+        <div class="lb-spec"><span class="lb-spec-label">Weight</span><span class="lb-spec-value">${s.weight} ct</span></div>
+        <div class="lb-spec"><span class="lb-spec-label">Shape</span><span class="lb-spec-value">${s.shape || '—'}</span></div>
+        <div class="lb-spec"><span class="lb-spec-label">Origin</span><span class="lb-spec-value">${s.origin || '—'}</span></div>
+        <div class="lb-spec"><span class="lb-spec-label">Color</span><span class="lb-spec-value">${s.color || '—'}</span></div>
+        <div class="lb-spec"><span class="lb-spec-label">Treatment</span><span class="lb-spec-value">${s.treatment || '—'}</span></div>
+        <div class="lb-spec"><span class="lb-spec-label">Grade</span><span class="lb-spec-value">${s.grade || '—'}</span></div>
+        <div class="lb-spec"><span class="lb-spec-label">Certificate</span><span class="lb-spec-value">${s.cert || '—'}</span></div>
+        <div class="lb-spec"><span class="lb-spec-label">Cert No</span><span class="lb-spec-value">${s.certNo || '—'}</span></div>
+        ${s.dims ? `<div class="lb-spec"><span class="lb-spec-label">Dimensions</span><span class="lb-spec-value">${s.dims}</span></div>` : ''}
+        ${s.pieces ? `<div class="lb-spec"><span class="lb-spec-label">Pieces</span><span class="lb-spec-value">${s.pieces}</span></div>` : ''}
+      </div>
+      <div class="lb-actions">
+        ${(s.video || s.certUrl || s.folder) ? `
+        <div class="lb-media-row">
+          ${s.video   ? `<a class="lb-media-btn" href="${s.video}" target="_blank">▶ Video</a>` : ''}
+          ${s.certUrl ? `<a class="lb-media-btn" href="${s.certUrl}" target="_blank">📄 Certificate</a>` : ''}
+          ${s.folder  ? `<a class="lb-media-btn" href="${s.folder}" target="_blank">📁 All Media</a>` : ''}
+        </div>` : ''}
+        <a class="lb-wa-btn" href="${waLink(s)}" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enquire on WhatsApp
+        </a>
+      </div>
+    </div>`;
+
+  document.getElementById('lightbox').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lb-close')) {
+    document.getElementById('lightbox').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
